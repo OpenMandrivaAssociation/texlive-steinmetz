@@ -6,7 +6,7 @@
 # catalog-version 1.0
 Name:		texlive-steinmetz
 Version:	1.0
-Release:	8
+Release:	9
 Summary:	Print Steinmetz notation
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/steinmetz
