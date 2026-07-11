@@ -1,49 +1,24 @@
-Name:		texlive-steinmetz
-Version:	15878
-Release:	2
+%global tl_name steinmetz
+%global tl_revision 77682
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.0
+Release:	%{tl_revision}.1
 Summary:	Print Steinmetz notation
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/steinmetz
-License:	LPPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/steinmetz.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/steinmetz.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/steinmetz.source.r%{version}.tar.xz
+License:	lppl
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/steinmetz.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/steinmetz.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/steinmetz.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The steinmetz package provides a command for typesetting
-complex numbers in the Steinmetz notation used in
-electrotechnics as: <modulus><argument or phase inside an angle
-symbol> The package makes use of pict2e.
+The steinmetz package provides a command for typesetting complex numbers
+in the Steinmetz notation used in electrotechnics as:
+<modulus>;<argument or phase inside an angle symbol> The package makes
+use of pict2e.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/latex/steinmetz/steinmetz.sty
-%doc %{_texmfdistdir}/doc/latex/steinmetz/README
-%doc %{_texmfdistdir}/doc/latex/steinmetz/steinmetz-test.tex
-%doc %{_texmfdistdir}/doc/latex/steinmetz/steinmetz.pdf
-#- source
-%doc %{_texmfdistdir}/source/latex/steinmetz/steinmetz.dtx
-%doc %{_texmfdistdir}/source/latex/steinmetz/steinmetz.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
